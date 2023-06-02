@@ -15,22 +15,22 @@ import java.util.Map;
 
 public class ClientService {
 
-    public static Client getClient() {
+    public Client getClient(long id) {
         try (Connection connection = SQLConection.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQLQueries.getClientsQuery());
+            PreparedStatement statement = connection.prepareStatement(SQLQueries.getClientsQuery());
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                long id = resultSet.getLong("id");
+                long clientId = resultSet.getLong("id");
                 long cpf = resultSet.getLong("cpf");
-                String nome = resultSet.getString("nome");
-                return new Client(id, cpf, nome);
+                String name = resultSet.getString("name");
+                return new Client(clientId, cpf, name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
     public Map<String, Object> getAllClients() {
         List<Client> clientsList = new ArrayList<>();
         Map<String, Object> result = new HashMap<>();
