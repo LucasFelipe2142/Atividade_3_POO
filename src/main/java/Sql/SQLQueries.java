@@ -2,42 +2,42 @@ package Sql;
 
 public class SQLQueries {
     public static String getClientsQuery() {
-        return "SELECT id, cpf, nome FROM Cliente WHERE id = ?";
+        return "SELECT id, cpf, name FROM clients WHERE id = ?";
     }
 
     public static String getAllClientsQuery() {
-        return "SELECT id, cpf, nome FROM Cliente";
+        return "SELECT id, cpf, name FROM clients";
     }
 
     public static String postClientsQuery() {
-        return "INSERT INTO Client (cpf, nome) VALUES (?, ?)";
+        return "INSERT INTO clients (cpf, name) VALUES (?, ?)";
     }
 
     public static String putClientsQuery() {
-        return "UPDATE Client SET cpf = ?, nome = ? WHERE id = ?";
+        return "UPDATE clients SET cpf = ?, name = ? WHERE id = ?";
     }
 
     public static String deleteClientsQuery() {
-        return "DELETE FROM Client WHERE id = ?";
+        return "DELETE FROM clients WHERE id = ?";
     }
 
     public static String getContractQuery() {
-        return "SELECT id, redacao, ultimaAtualizacao, cliente_id FROM Contract WHERE id = ?";
+        return "SELECT id, redacao, ultimaAtualizacao, cliente_id FROM contracts WHERE id = ?";
     }
 
     public static String getAllContractQuery() {
-        return "SELECT id, redacao, ultimaAtualizacao, cliente_id FROM Contract";
+        return "SELECT id, redacao, ultimaAtualizacao, cliente_id FROM contracts";
     }
 
     public static String postContractQuery() {
-        return "INSERT INTO Contract (redacao, ultimaAtualizacao, cliente_id) VALUES (?, ?, ?)";
+        return "INSERT INTO contracts (redacao, ultimaAtualizacao, cliente_id) VALUES (?, ?, ?)";
     }
 
     public static String putContractQuery() {
-        return "UPDATE Contract SET redacao = ?, ultimaAtualizacao = ?, cliente_id = ? WHERE id = ?";
+        return "UPDATE contracts SET redacao = ?, ultimaAtualizacao = ?, cliente_id = ? WHERE id = ?";
     }
 
     public static String deleteContractQuery() {
-        return "DELETE FROM Contract WHERE id = ?";
+        return "DELETE FROM contracts WHERE id = ?";
     }
 }

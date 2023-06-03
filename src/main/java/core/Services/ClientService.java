@@ -40,7 +40,7 @@ public class ClientService {
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 long cpf = resultSet.getLong("cpf");
-                String nome = resultSet.getString("nome");
+                String nome = resultSet.getString("name");
                 Client client = new Client(id, cpf, nome);
                 clientsList.add(client);
             }
@@ -77,25 +77,32 @@ public class ClientService {
     }
 
     public Map<String, Object> updateClient(Client client, long id) {
+        Map<String, Object> result = new HashMap<>();
         try (Connection connection = SQLConection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SQLQueries.putClientsQuery());
             statement.setLong(1, client.getCpf());
             statement.setString(2, client.getName());
             statement.setLong(3, id);
             statement.executeUpdate();
+            result.put("status", 200);
         } catch (SQLException e) {
             e.printStackTrace();
+            result.put("status", 500);
         }
-        return null;
+        return result;
     }
 
-    public void deleteClient(long id) {
+    public Map<String, Object> deleteClient(long id) {
+        Map<String, Object> result = new HashMap<>();
         try (Connection connection = SQLConection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SQLQueries.deleteClientsQuery());
             statement.setLong(1, id);
             statement.executeUpdate();
+            result.put("status", 200);
         } catch (SQLException e) {
             e.printStackTrace();
+            result.put("status", 500);
         }
+        return result;
     }
 }
